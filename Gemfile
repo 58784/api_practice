@@ -43,6 +43,7 @@ group :development, :test do
   gem 'rspec-rails', git: 'https://github.com/rspec/rspec-rails.git', tag: 'v4.0.0.beta3'
   gem 'rspec_junit_formatter'
   gem 'sorcery'
+  gem 'fast_jsonapi'
 end
 
 group :test do
