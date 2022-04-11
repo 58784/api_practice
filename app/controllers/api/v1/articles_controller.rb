@@ -12,9 +12,9 @@ module Api
       end
 
       def show
-        # options = { include: [:user, :'user.name', :email, :'user.email']}
-        # json_string = ArticleSerializer.new(@article, options).serialized_json
-        json_string = ArticleSerializer.new(@article).serialized_json
+        # N+1問題でincludeしてる
+        options = { include: [:user, :'user.name', :email, :'user.email']}
+        json_string = ArticleSerializer.new(@article, options).serialized_json
         render json: json_string
       end
 
