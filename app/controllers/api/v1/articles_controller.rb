@@ -13,7 +13,7 @@ module Api
 
       def show
         # N+1問題でincludeしてる
-        options = { include: [:user, :'user.name', :email, :'user.email']}
+        options = { include: %i[user user.name email user.email] }
         json_string = ArticleSerializer.new(@article, options).serialized_json
         render json: json_string
       end
