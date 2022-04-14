@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :articles, only: %i[index show]
       post 'authentication', to: 'authentication#create'
+      post 'registration', to: 'registration#create'
     end
   end
 end

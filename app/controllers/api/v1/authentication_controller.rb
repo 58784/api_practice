@@ -16,10 +16,6 @@ module Api
           render json: response, status: :not_found
         end
       end
-
-      private
-
-      def form_authenticity_token; end
     end
   end
 end

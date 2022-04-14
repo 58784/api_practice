@@ -4,6 +4,7 @@ module Api::ExceptionHandler
   included do
     rescue_from StandardError, with: :render500
     rescue_from ActiveRecord::RecordNotFound, with: :render404
+    rescue_from ActionController::BadRequest, with: :render400
   end
 
   private
