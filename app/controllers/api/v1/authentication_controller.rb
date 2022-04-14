@@ -13,7 +13,7 @@ module Api
             message: 'Record Not Found',
             errors: ['ActiveRecord::RecordNotFound']
           }
-          render json: response, status: 404
+          render json: response, status: :not_found
         end
       end
 
