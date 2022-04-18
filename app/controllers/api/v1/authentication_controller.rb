@@ -7,6 +7,8 @@ module Api
         @user = login(params[:email], params[:password])
         if @user
           json_string = UserSerializer.new(@user).serialized_json
+          api_key = @user.activate_api_key!
+          response.headers['AccessToken'] = api_key.access_token
           render json: json_string
         else
           response = {
