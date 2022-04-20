@@ -3,20 +3,15 @@
 module Api
   module V1
     class AuthenticationController < BaseController
+      skip_before_action :authenticate
+      
       def create
         @user = login(params[:email], params[:password])
-        if @user
-          json_string = UserSerializer.new(@user).serialized_json
-          api_key = @user.activate_api_key!
-          response.headers['AccessToken'] = api_key.access_token
-          render json: json_string
-        else
-          response = {
-            message: 'Record Not Found',
-            errors: ['ActiveRecord::RecordNotFound']
-          }
-          render json: response, status: :not_found
-        end
+        raise ActiveRecord::RecordNotFound unless @user
+
+        json_string = UserSerializer.new(@user).serialized_json
+        set_access_token!(@user)
+        render json: json_string
       end
     end
   end
