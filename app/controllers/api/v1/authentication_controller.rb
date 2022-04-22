@@ -4,7 +4,7 @@ module Api
   module V1
     class AuthenticationController < BaseController
       skip_before_action :authenticate
-      
+
       def create
         @user = login(params[:email], params[:password])
         raise ActiveRecord::RecordNotFound unless @user

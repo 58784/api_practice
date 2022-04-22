@@ -1,6 +1,7 @@
 # This file overrides https://github.com/bbatsov/rubocop/blob/master/config/default.yml
 
 AllCops:
+  NewCops: enable
   Exclude:
     - 'vendor/**/*'
     - 'db/**/*'
@@ -45,6 +46,9 @@ Naming/AccessorMethodName:
     - 'app/controllers/**/*'
 
 NumericLiterals:
+  Enabled: false
+
+Naming/MemoizedInstanceVariableName:
   Enabled: false
 
 Style/AsciiComments:
