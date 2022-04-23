@@ -2,47 +2,56 @@
 
 module Api
   module V1
-      class User::ArticlesController < BaseController
-        before_action :set_article, only: %i[show update create]
+    class User::ArticlesController < BaseController
+      before_action :set_article, only: %i[update destroy]
+      before_action :set_articles, only: :index
 
-        def index
-          article = Article.all
+      def index
+        json_string = ArticleSerializer.new(@articles).serialized_json
+        render json: json_string
+      end
+
+      def create
+        article = current_user.articles.new(article_params)
+
+        if article.save
           json_string = ArticleSerializer.new(article).serialized_json
           render json: json_string
+        else
+          render400(nil, article.errors.full_messages)
         end
+      end
 
-        def show
-          # N+1問題でincludeしてる
-          options = { include: %i[user user.name email user.email] }
-          json_string = ArticleSerializer.new(@article, options).serialized_json
+      def update
+        if @article.update(article_params)
+          json_string = ArticleSerializer.new(@article).serialized_json
           render json: json_string
+        else
+          render400(nil, article.errors.full_messages)
         end
+      end
 
-        def create
-          article = Article.create!(article_params)
-          json_string = ArticleSerializer.new(article).serialized_json
-          render json: json_string
-        end
+      def destroy
+        @article.destroy!
+        set_articles
+        json_string = ArticleSerializer.new(@articles).serialized_json
 
-        def update
-          article.update!(article_params)
-          json_string = ArticleSerializer.new(article).serialized_json
-          render json: json_string
-        end
+        render json: json_string
+      end
 
-        def destroy
-          article.destroy!
-        end
+      private
 
-        private
+      def set_article
+        @article = current_user.articles.find(params[:id])
+      end
 
-        def set_article
-          @article = Article.find(params[:id])
-        end
+      def set_articles
+        @articles = current_user.articles
+      end
 
-        def article_params
-          params.require(:article).permit(:title, :contents)
-        end
+      def article_params
+        params.require(:article).permit(:title, :contents, :status)
+      end
     end
   end
 end

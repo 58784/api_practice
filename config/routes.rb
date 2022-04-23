@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :articles, only: %i[index show]
       namespace :user do
-        resources :articles, only: %i[index show create update destroy]
+        resources :articles, only: %i[index create update destroy]
       end
       post 'authentication', to: 'authentication#create'
       post 'registration', to: 'registration#create'
