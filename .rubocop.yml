@@ -11,6 +11,7 @@ AllCops:
     - 'config/**/*'
     - 'Gemfile'
     - 'test/**/*'
+    - 'doc/**/*'
   DisplayCopNames: true
 
 Layout/MultilineBlockLayout:
