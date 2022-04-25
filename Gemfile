@@ -44,6 +44,7 @@ group :development, :test do
   gem 'rspec_junit_formatter'
   gem 'sorcery'
   gem 'fast_jsonapi'
+  gem 'autodoc'
 end
 
 group :test do

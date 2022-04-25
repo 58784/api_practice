@@ -73,6 +73,10 @@ GEM
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
     ast (2.4.2)
+    autodoc (0.7.6)
+      actionpack
+      activesupport (>= 3.0.0)
+      rspec
     bcrypt (3.1.17)
     bootsnap (1.11.1)
       msgpack (~> 1.2)
@@ -183,6 +187,10 @@ GEM
       ffi (~> 1.0)
     regexp_parser (2.2.1)
     rexml (3.2.5)
+    rspec (3.11.0)
+      rspec-core (~> 3.11.0)
+      rspec-expectations (~> 3.11.0)
+      rspec-mocks (~> 3.11.0)
     rspec-core (3.11.0)
       rspec-support (~> 3.11.0)
     rspec-expectations (3.11.0)
@@ -255,6 +263,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  autodoc
   bootsnap (>= 1.4.2)
   byebug
   capybara
